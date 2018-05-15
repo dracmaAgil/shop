@@ -1,0 +1,9 @@
+- size ||= :mini
+- itemprop ||= nil
+- if image && image.attachment?
+  - if itemprop
+    = image_tag image.attachment(size), itemprop: itemprop
+  - else
+    = image_tag image.attachment(size)
+- else
+  %span{:class => "image-placeholder #{size}"}

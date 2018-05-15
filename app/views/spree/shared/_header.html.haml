@@ -1,0 +1,13 @@
+%nav.navbar.navbar-expand-lg.sticky-top.navbar-light.bg-light
+  .container
+    %figure#logo.columns.six{"data-hook" => ""}= logo img_options: { class: 'img-responsive', width: '118' }
+    %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarNavDropdown.collapse.navbar-collapse
+      %ul.nav.navbar-nav.mr-auto
+        - @taxonomies.each do |taxonomy|
+          %li.nav-item.dropdown
+            = link_to '#', id:'navbarDropdownMenuLink', class: 'nav-link dropdown-toggle', data: { toggle: "dropdown" }, "aria-haspopup" => 'true', "aria-expanded" => "false" do
+              = taxonomy.name do
+                %span.caret
+            = nav_tree(taxonomy.root, @taxon, 1)

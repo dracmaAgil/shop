@@ -1,0 +1,40 @@
+= form_for :order, url: populate_orders_path, html: { class: 'form-inline'} do |f|
+  #inside-product-cart-form{"data-hook" => "inside_product_cart_form", :itemprop => "offers", :itemscope => "", :itemtype => "http://schema.org/Offer"}
+    - if @product.variants_and_option_values_for(current_pricing_options).any?
+      #product-variants.columns.five.alpha
+        %h6.product-section-title= t('spree.variants')
+        %ul
+          - @product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index|
+            %li
+              = radio_button_tag "variant_id", variant.id, index == 0, 'data-price' => variant.price_for(current_pricing_options)
+              = label_tag "variant_id_#{ variant.id }" do
+                %span.variant-description
+                  = variant_options variant
+                - if variant_price variant
+                  %span.price.diff= variant_price variant
+                - unless variant.can_supply?
+                  %span.out-of-stock= t('spree.out_of_stock')
+    - else
+      = hidden_field_tag "variant_id", @product.master.id
+    - if @product.price_for(current_pricing_options) and !@product.price.nil?
+      %div{:class => "columns five #{!@product.has_variants? ? 'alpha' : 'omega'}", "data-hook" => "product_price"}
+        #product-price
+          %h6.product-section-title= t('spree.price')
+          %div
+            %p.price.selling.lead{:content => "#{@product.price_for(current_pricing_options).to_d}", :itemprop => "price"}
+              = display_price(@product)
+            %span{:content => "#{current_pricing_options.currency}", :itemprop => "priceCurrency"}
+          - if @product.master.can_supply?
+            %link{:href => "http://schema.org/InStock", :itemprop => "availability"}/
+          - elsif @product.variants.empty?
+            %br/
+            %span.out-of-stock= t('spree.out_of_stock')
+        .add-to-cart.form-group
+          = number_field_tag :quantity, 1, class: 'title form-control', min: 1
+          = button_tag class: 'large primary', id: 'add-to-cart-button', class:'btn btn-success', type: :submit do
+            = t('spree.add_to_cart')
+    - else
+      #product-price
+        %br/
+        %div
+          %span.price.selling{:itemprop => "price"}= t('spree.product_not_available_in_this_currency')

@@ -1,0 +1,32 @@
+- paginated_products = @searcher.retrieve_products if params.key?(:keywords)
+- paginated_products ||= products
+- content_for :head do
+  - if paginated_products.respond_to?(:total_pages)
+    = rel_next_prev_link_tags paginated_products
+%div{"data-hook" => "products_search_results_heading"}
+  - if products.empty?
+    %div{"data-hook" => "products_search_results_heading_no_results_found"}
+      = t('spree.no_products_found')
+  - elsif params.key?(:keywords)
+    %div{"data-hook" => "products_search_results_heading_results_found"}
+      %h6.search-results-title= t('spree.search_results', keywords: h(params[:keywords]))
+- if products.any?
+  #products.inline.product-listing.row.card-deck{"data-hook" => ""}
+    - products.each do |product|
+      .col-sm-6.col-md-4
+        - url = spree.product_path(product, taxon_id: @taxon.try(:id))
+        .card.mb-3{:class => "#{cycle("alpha", "secondary", "", "omega secondary", name: "classes")}", "data-hook" => "products_list_item", :id => "product_#{product.id}", :itemscope => "", :itemtype => "http://schema.org/Product"}
+          - cache(@taxon.present? ? [I18n.locale, current_pricing_options, @taxon, product] : [I18n.locale, current_pricing_options, product]) do
+            .product-image.text-center
+              = link_to(render('spree/shared/image', image: product.display_image, size: :small, itemprop: "image"), url, itemprop: 'url')
+            .card-body  
+              %h5.card-title= link_to truncate(product.name, length: 50), url, class: 'info', itemprop: "name", title: product.name
+              %P
+                =link_to url, class: 'btn btn-primary' do
+                  %span{:itemprop => "offers", :itemscope => "", :itemtype => "http://schema.org/Offer"}
+                    %span.price.selling{:content => "#{product.price_for(current_pricing_options).to_d}", :itemprop => "price"}
+                      = display_price(product)
+                    %span{:content => "#{current_pricing_options.currency}", :itemprop => "priceCurrency"}
+    - reset_cycle("classes")
+- if paginated_products.respond_to?(:total_pages)
+  = paginate paginated_products

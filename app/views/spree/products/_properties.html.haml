@@ -1,0 +1,9 @@
+- unless @product_properties.empty?
+  %h6.product-section-title= t('spree.properties')
+  %ul.list-group#product-properties{"data-hook" => ""}
+    - @product_properties.each do |product_property|
+      - css_class = cycle('even', 'odd', name: "properties")
+      %li.list-group-item.d-flex.justify-content-between.align-items-center{:class => css_class}
+        = product_property.property.presentation
+        %span.badge.badge-primary.badge-pill= product_property.value
+    - reset_cycle('properties')
