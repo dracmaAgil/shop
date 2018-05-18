@@ -1,0 +1,26 @@
+- variant = line_item.variant
+= order_form.fields_for :line_items, line_item do |item_form|
+  %tr{:class => "#{cycle('', 'alt')} line-item"}
+    %td.cart-item-image{"data-hook" => "cart_item_image"}
+      - if variant.images.empty?
+        = link_to(render('spree/shared/image', image: variant.product.display_image, size: :small), variant.product)
+      - else
+        = link_to(render('spree/shared/image', image: variant.images.first, size: :small), variant.product)
+    %td.cart-item-description{"data-hook" => "cart_item_description"}
+      %h4= link_to line_item.name, product_path(variant.product)
+      = variant.options_text
+      - if line_item.insufficient_stock?
+        %span.out-of-stock
+          = t('spree.out_of_stock')
+            
+          %br/
+      %span.line-item-description{"data-hook" => "line_item_description"}
+        = line_item_description_text(line_item.description)
+    %td.cart-item-price{"data-hook" => "cart_item_price"}
+      = line_item.single_money.to_html
+    %td.cart-item-quantity{"data-hook" => "cart_item_quantity"}
+      = item_form.number_field :quantity, min: 0, class: "line_item_quantity form-control", size: 5
+    %td.cart-item-total{"data-hook" => "cart_item_total"}
+      = line_item.display_amount.to_html unless line_item.quantity.nil?
+    %td.cart-item-delete{"data-hook" => "cart_item_delete"}
+      = link_to image_tag('icons/delete.png'), '#', class: 'delete', id: "delete_#{dom_id(line_item)}"

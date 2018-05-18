@@ -11,3 +11,11 @@
               = taxonomy.name do
                 %span.caret
             = nav_tree(taxonomy.root, @taxon, 1)
+      %ul.nav.navbar-nav.navbar-right
+        %li#link-to-cart{"data-hook" => ""}
+          %noscript
+            = link_to t('spree.cart'), spree.cart_path
+           
+        :javascript
+          Spree.fetch_cart('#{j spree.cart_link_path}')
+
