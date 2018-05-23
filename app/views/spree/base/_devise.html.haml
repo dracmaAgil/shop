@@ -2,8 +2,7 @@
   #wrapper.row{"data-hook" => ""}
     = taxon_breadcrumbs(@taxon)
     / = render partial: 'spree/shared/sidebar' if content_for? :sidebar
-    #content{:class => "columns #{!content_for?(:sidebar) ? "sixteen" : "twelve omega"}", "data-hook" => ""}
+    #content{:class => "container-fluid columns #{!content_for?(:sidebar) ? "sixteen" : "twelve omega"}", "data-hook" => ""}
       = flash_messages
       = yield
     = yield :templates
-  = render partial: 'spree/shared/footer'

@@ -1,0 +1,18 @@
+- if flash[:alert]
+  .flash.errors= flash[:alert]
+- @body_id = 'login'
+- @body_class = 'devise_views'
+#existing-customer.row
+  .col-md-4
+  .col-md-4.col-md-offset-4
+    .card.mb-3
+      .card-header
+        = Spree.t(:login_as_existing)
+      .card-body
+        %div{"data-hook" => "login"}
+          = render partial: 'spree/shared/login'
+          %hr
+           #{link_to Spree.t(:create_a_new_account), spree.signup_path} | #{link_to Spree.t(:forgot_password), spree.recover_password_path}
+  .col-md-4
+
+/ %div{"data-hook" => "login_extras"}

@@ -1,0 +1,29 @@
+= render partial: 'spree/shared/error_messages', locals: { target: @user }
+.devise_views.card.mb-3
+  .card-header
+    = Spree.t(:registration)
+  .card-body
+    #registration.row{"data-hook" => ""}
+      #account.col-md-6
+        .row
+          .col-md-2
+          .col-md-8.col-md-offset-2
+            = render partial: 'spree/user_sessions/login'
+          .col-md-2
+      - if Spree::Config[:allow_guest_checkout]
+        #guest_checkout.col-md-6{"data-hook" => ""}
+          .row
+            .col-md-2
+            .col-md-8.col-md-offset-2
+              .alert.alert-info
+                = Spree.t(:guest_user_account)
+              - if flash[:registration_error]
+                .flash.error= flash[:registration_error]
+              = form_for @order, url: update_checkout_registration_path, method: :put, html: { id: 'checkout_form_registration' } do |f|
+                .form-group
+                  = f.label :email, Spree.t(:email)
+                  = f.email_field :email, class: 'title form-control'
+                .actions
+                  = f.submit Spree.t(:continue), class: 'btn btn-primary btn-block'
+            .col-md-2
+
