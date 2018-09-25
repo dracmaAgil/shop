@@ -13,6 +13,7 @@
             = form.label :email
             %br/
             = form.email_field :email, class: 'form-control', required: true
+        = @order.state == 'address' || !@order.email?
         = render @order.state, form: form
     
     - if @order.state != 'confirm'
@@ -22,4 +23,4 @@
   Spree.current_order_id = "#{@order.number}"
   Spree.current_order_token = "#{@order.guest_token}"
 - if I18n.locale != :en
-  = javascript_include_tag 'jquery.validate/localization/messages_' + I18n.locale.to_s.downcase.gsub('-', '')
+  / = javascript_include_tag 'jquery.validate/localization/messages_' + I18n.locale.to_s.downcase.gsub('-', '')
