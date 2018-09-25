@@ -14,8 +14,10 @@
           %hr
           .links.columns.sixteen.alpha.omega.form-group.bd-example{"data-hook" => "cart_buttons"}
             = order_form.text_field :coupon_code, size: 10, placeholder: t('spree.coupon_code'), class: 'form-control'
+            .ml-1
             = button_tag class: 'primary btn btn-success', id: 'update-button' do
               = t('spree.update')
+            .ml-1
             = button_tag class: 'button checkout primary btn btn-primary', id: 'checkout-link', name: 'checkout' do
               = t('spree.checkout')
     %hr

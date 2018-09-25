@@ -31,6 +31,7 @@
             %span.out-of-stock= t('spree.out_of_stock')
         .add-to-cart.form-group
           = number_field_tag :quantity, 1, class: 'title form-control', min: 1
+          .ml-1
           = button_tag class: 'large primary', id: 'add-to-cart-button', class:'btn btn-success', type: :submit do
             = t('spree.add_to_cart')
     - else
