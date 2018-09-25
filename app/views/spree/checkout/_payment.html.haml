@@ -27,6 +27,7 @@
       - @order.available_payment_methods.each do |method|
         %li{:class => "#{'last' if method == @order.available_payment_methods.last}", "data-hook" => "", :id => "payment_method_#{method.id}"}
           %fieldset
+            = binding.pry
             = render partial: "spree/checkout/payment/#{method.partial_name}", locals: { payment_method: method }
     %br{:style => "clear:both;"}/
     / .form-group.field{"data-hook" => "coupon_code"}

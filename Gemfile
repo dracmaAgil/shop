@@ -38,11 +38,14 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 gem 'haml-rails'
-
+gem 'font-awesome-sass', '~> 5.3.1'
 gem 'activemerchant'
-
-gem "solidus_gateway"
+# gem 'solidus_gateway'
 gem 'solidus_paypal_braintree', github: 'solidusio/solidus_paypal_braintree', branch: :master
+# gem 'solidus_i18n', '~> 2.0'
+gem 'rails-i18n', '~> 5.1'
+gem 'kaminari-i18n', '~> 0.5.0'
+gem 'routing-filter', '~> 0.6.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
