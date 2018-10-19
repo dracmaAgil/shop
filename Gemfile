@@ -16,6 +16,7 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.7'
 gem 'bootstrap'
 gem 'jquery-rails'
+gem 'popper_js', '~> 1.14.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -42,7 +43,7 @@ gem 'font-awesome-sass', '~> 5.3.1'
 gem 'activemerchant'
 # gem 'solidus_gateway'
 gem 'solidus_paypal_braintree', github: 'solidusio/solidus_paypal_braintree', branch: :master
-# gem 'solidus_i18n', '~> 2.0'
+gem 'solidus_i18n', '~> 2.0'
 gem 'rails-i18n', '~> 5.1'
 gem 'kaminari-i18n', '~> 0.5.0'
 gem 'routing-filter', '~> 0.6.0'

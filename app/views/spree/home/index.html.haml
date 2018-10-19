@@ -1,6 +1,15 @@
-/ - content_for :sidebar do
-/   %div{"data-hook" => "homepage_sidebar_navigation"}
-/     = render partial: 'spree/shared/taxonomies'
+.cart-bg-overlay
+.right-side-cart-area
+%section.welcome_area.bg-img.background-overlay.welcome_image
+  .container.h-100
+    .row.h-100.align-items-center
+      .col-12
+        .hero-content
+          %h6
+            asoss
+          %h2
+            New Collection
+          =link_to 'view collection', '',class: 'btn essence-btn'
 %div{"data-hook" => "homepage_products"}
   - cache(cache_key_for_products) do
     = render partial: 'spree/shared/products', locals: { products: @products }

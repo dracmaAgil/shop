@@ -34,5 +34,7 @@ module Shop
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    config.assets.paths << Rails.root.join('vendor', 'assets')
   end
 end

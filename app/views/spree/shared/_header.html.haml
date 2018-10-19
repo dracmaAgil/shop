@@ -1,23 +1,41 @@
-%nav.navbar.navbar-expand-lg.sticky-top.navbar-light
-  .container
-    %figure#logo.columns.six{"data-hook" => ""}= logo img_options: { class: 'img-responsive', width: '118' }
-    %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
-      %span.navbar-toggler-icon
-    #navbarNavDropdown.collapse.navbar-collapse
-      %ul.nav.navbar-nav.mr-auto
-        - @taxonomies.each do |taxonomy|
-          %li.nav-item.dropdown
-            = link_to '#', id:'navbarDropdownMenuLink', class: 'nav-link dropdown-toggle', data: { toggle: "dropdown" }, "aria-haspopup" => 'true', "aria-expanded" => "false" do
-              = taxonomy.name do
-                %span.caret
-            = nav_tree(taxonomy.root, @taxon, 1)
-      %i.fa.fa-shopping-cart.fa-lg
-      .ml-1
-      %ul.nav.navbar-nav.navbar-right
-        %li#link-to-cart{"data-hook" => ""}
+%header.header_area
+  .classy-nav-container.breakpoint-off.d-flex.align-items-center.justify-content-between
+    %nav#essenceNav.classy-navbar.navbar.navbar-expand-lg.sticky-top
+      %figure#logo{"data-hook" => ""}= logo img_options: { class: 'img-responsive', width: '74', height: '16' }
+      %button.navbar-toggler{"aria-controls" => "navbarNavDropdown", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNavDropdown", "data-toggle" => "collapse", :type => "button"}
+        %span.navbar-toggler-icon
+      .classy-navbar-toggler
+        %span.navbarToggler
+          %span
+          %span
+          %span
+      .classy-menu
+        / close btn
+        / .classycloseIcon
+        /   .cross-wrap
+        /     %span.top
+        /     %span.bottom
+
+        #navbarNavDropdown.classynav
+          %ul.nav.navbar-nav.mr-auto.dropdown
+            - @taxonomies.each do |taxonomy|
+              %li.nav-item.dropdown
+                = link_to '#', id:'navbarDropdownMenuLink', class: 'nav-link dropdown-toggle', data: { toggle: "dropdown" }, "aria-haspopup" => 'true', "aria-expanded" => "false" do
+                  = taxonomy.name do
+                    %span.caret
+                = nav_tree(taxonomy.root, @taxon, 1)
+
+    .header-meta.d-flex.clearfix.justify-content-end
+      .search-area
+        = render partial: 'spree/shared/search'
+      .user-login-info
+        = link_to(image_tag('/img/core-img/user.svg', alt: ''), spree.login_path)
+      .cart-area
+        #link-to-cart{"data-hook" => ""}
           %noscript
             = link_to t('spree.cart'), spree.cart_path
            
         :javascript
           Spree.fetch_cart('#{j spree.cart_link_path}')
-
+.clear_fix
+          

@@ -1,4 +1,19 @@
 module Spree::BaseHelper
+  
+  def link_to_cart(text = nil)
+    text = text ? h(text) : t('spree.cart')
+    text = text ? h(text) : ""
+    css_class = nil
+
+    if current_order.nil? || current_order.item_count.zero?
+      text = "#{text}: (#{t('spree.empty')})"
+      css_class = 'empty'
+    else
+      text = "#{text}: (#{current_order.item_count})  <span class='amount'>#{current_order.display_total.to_html}</span>"
+      css_class = 'full'
+    end
+    link_to image_tag('/img/core-img/bag.svg', alt: ''), spree.cart_path, class: "cart-info #{css_class}"
+  end
 
   def flash_messages(opts = {})
     ignore_types = ["order_completed"].concat(Array(opts[:ignore_types]).map(&:to_s) || [])
@@ -16,7 +31,7 @@ module Spree::BaseHelper
   end
 
   def logo(image_path = Spree::Config[:logo], img_options: {})
-    link_to image_tag(image_path, img_options), spree.root_path
+    link_to image_tag(image_path, img_options), spree.root_path, class: 'nav-brand'
   end
 
   def nav_tree(root_taxon, current_taxon, max_level = 1)
