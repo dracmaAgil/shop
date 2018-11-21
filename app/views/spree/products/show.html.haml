@@ -1,33 +1,45 @@
 - cache [I18n.locale, current_pricing_options, @product] do
   %div{"data-hook" => "product_show", :itemscope => "", :itemtype => "http://schema.org/Product"}
     - @body_id = 'product-details'
-    .row
-      .col-md-12
-        %h1.product-title{:itemprop => "name"}= @product.name
-    .row
-      .col-md-3{"data-hook" => "product_left_part"}
+    %br
+    %section.single_product_details_area.d-flex.align-items-center
+      .single_product_thumb.clearfix.stick_to_top{"data-hook" => "product_left_part"}
         %div{"data-hook" => "product_left_part_wrap"}
           #product-images{"data-hook" => "product_images"}
-            #main-image{"data-hook" => ""}
-              = render partial: 'image'
-            #thumbnails{"data-hook" => ""}
-              = render partial: 'thumbnails'
-          %div{"data-hook" => "promotions"}
-            = render partial: 'promotions'
+            .row
+              -if @product.possible_promotions.any?
+                .col-md-8
+                  %center
+                    #main-image{"data-hook" => ""}
+<<<<<<< HEAD
+                      = render partial: 'image'
+                    #main-image-1
+=======
+                      .product_thumbnail_slides.owl-carousel
+                        = render partial: 'image'
+>>>>>>> 578b95e... wip
+                .col-md-4
+                  %div{"data-hook" => "promotions"}
+                    = render partial: 'promotions'
+              -else
+                .col-md-12
+                  %center
+                    #main-image{"data-hook" => ""}
+                      = render partial: 'image', locals: {product: @product}
 
-      .col-md-4{"data-hook" => "product_center_part"}
+      .single_product_desc.clearfix{"data-hook" => "product_right_part"}
+        %span= get_brand_name(@taxonomies, @product)
+        %h3.product-title{:itemprop => "name"}= @product.name
+        #product-description.clearfix{"data-hook" => "product_description"}
+        
+          %div{"data-hook" => "description", :itemprop => "description"}
+            %p.product-desc
+              = product_description(@product) rescue t('spree.productt_has_no_description')
+        %hr
+        #cart-form.clearfix{"data-hook" => "cart_form"}
+          = render partial: 'cart_form'
+        = render partial: 'taxons'
+        %hr
         %div{"data-hook" => "product_center_part_wrap"}
           %div{"data-hook" => "product_properties"}
             = render partial: 'properties'
-
-      .col-md-5{"data-hook" => "product_right_part"}
-        %h6.product-section-title= t('spree.details')
-        .card{"data-hook" => "product_right_part_wrap"}
-          .card-body
-            #product-description{"data-hook" => "product_description"}
-            
-              %div{"data-hook" => "description", :itemprop => "description"}
-                = product_description(@product) rescue t('spree.product_has_no_description')
-              #cart-form{"data-hook" => "cart_form"}
-                = render partial: 'cart_form'
-            = render partial: 'taxons'

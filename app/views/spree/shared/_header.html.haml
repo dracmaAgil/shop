@@ -10,20 +10,15 @@
           %span
           %span
       .classy-menu
-        / close btn
-        / .classycloseIcon
-        /   .cross-wrap
-        /     %span.top
-        /     %span.bottom
-
         #navbarNavDropdown.classynav
-          %ul.nav.navbar-nav.mr-auto.dropdown
+          %ul
             - @taxonomies.each do |taxonomy|
-              %li.nav-item.dropdown
-                = link_to '#', id:'navbarDropdownMenuLink', class: 'nav-link dropdown-toggle', data: { toggle: "dropdown" }, "aria-haspopup" => 'true', "aria-expanded" => "false" do
+              %li
+                = link_to '#', id:'navbarDropdownMenuLink', class: 'nav-link', data: { toggle: "dropdown" }, "aria-haspopup" => 'true', "aria-expanded" => "false" do
                   = taxonomy.name do
                     %span.caret
-                = nav_tree(taxonomy.root, @taxon, 1)
+                %ul.dropdown
+                  = nav_tree(taxonomy.root, @taxon, 1)
 
     .header-meta.d-flex.clearfix.justify-content-end
       .search-area

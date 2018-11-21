@@ -1,0 +1,65 @@
+%footer.footer_area.clearfix
+  .container
+    .row
+      .col-12.col-md-6
+        .single_widget_area.d-flex.mb-30
+          .footer-logo.mr-50
+            = link_to(image_tag('/img/core-img/logo2.png', alt: ''), spree.root_path)
+          .footer_menu
+            %ul
+              %li
+                = link_to t('spree.cart'), spree.cart_path
+              %li
+                = link_to t('spree.login'), spree.login_path
+
+      .col-12.col-md-6
+        .single_widget_area.mb-30
+          %ul.footer_widget_menu
+            %li
+              %a{:href => "#"} Order Status
+            %li
+              %a{:href => "#"} Payment Options
+            %li
+              %a{:href => "#"} Shipping and Delivery
+            %li
+              %a{:href => "#"} Guides
+            %li
+              %a{:href => "#"} Privacy Policy
+            %li
+              %a{:href => "#"} Terms of Use
+
+    .row.align-items-end
+      .col-12.col-md-6
+        .single_widget_area
+          .footer_heading.mb-30
+          .subscribtion_form
+
+      .col-12.col-md-6
+        .single_widget_area
+          .footer_social_area
+            %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Facebook"}
+              %i.fa.fa-facebook{"aria-hidden" => "true"}
+            %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Instagram"}
+              %i.fa.fa-instagram{"aria-hidden" => "true"}
+            %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Twitter"}
+              %i.fa.fa-twitter{"aria-hidden" => "true"}
+            %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Pinterest"}
+              %i.fa.fa-pinterest{"aria-hidden" => "true"}
+            %a{"data-placement" => "top", "data-toggle" => "tooltip", :href => "#", :title => "Youtube"}
+              %i.fa.fa-youtube-play{"aria-hidden" => "true"}
+    
+    .row.mt-5
+      .col-md-12.text-center
+        %p
+          / Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+          Copyright ©
+          :javascript
+            document.write(new Date().getFullYear());
+          All rights reserved | This template is made with
+          %i.fa.fa-heart-o{"aria-hidden" => "true"}
+          by
+          %a{:href => "https://colorlib.com", :target => "_blank"} Colorlib
+          / Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0.
+
+= javascript_include_tag 'spree/frontend/plugins'
+= javascript_include_tag 'spree/frontend/active'

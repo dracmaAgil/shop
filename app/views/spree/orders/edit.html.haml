@@ -1,6 +1,11 @@
 - @body_id = 'cart'
-%div{"data-hook" => "cart_container"}
-  %h1= t('spree.shopping_cart')
+.breadcumb_area.bg-img{style: "background-image: url(/img/bg-img/breadcumb.jpg);"}
+  .container.h-100
+    .row.h-100.align-items-center
+      .col-12
+        .page-title.text-center
+          %h2.taxon-title= t('spree.shopping_cart')
+.container{"data-hook" => "cart_container"}
   - if @order.line_items.empty?
     %div{"data-hook" => "empty_cart"}
       %p= t('spree.your_cart_is_empty')
@@ -15,10 +20,10 @@
           .links.columns.sixteen.alpha.omega.form-group.bd-example{"data-hook" => "cart_buttons"}
             = order_form.text_field :coupon_code, size: 10, placeholder: t('spree.coupon_code'), class: 'form-control'
             .ml-1
-            = button_tag class: 'primary btn btn-success', id: 'update-button' do
+            = button_tag class: 'btn essence-btn', id: 'update-button' do
               = t('spree.update')
             .ml-1
-            = button_tag class: 'button checkout primary btn btn-primary', id: 'checkout-link', name: 'checkout' do
+            = button_tag class: 'btn essence-btn', id: 'checkout-link', name: 'checkout' do
               = t('spree.checkout')
     %hr
     #empty-cart{"data-hook" => ""}

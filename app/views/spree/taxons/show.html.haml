@@ -1,0 +1,31 @@
+.breadcumb_area.bg-img{style: "background-image: url(/img/bg-img/breadcumb.jpg);"}
+  .container.h-100
+    .row.h-100.align-items-center
+      .col-12
+        .page-title.text-center
+          %h2.taxon-title= @taxon.name
+- content_for :sidebar do
+  %div{"data-hook" => "taxon_sidebar_navigation"}
+    = render partial: 'spree/shared/taxonomies'
+    = render partial: 'spree/shared/filters' if @taxon.children.empty?
+%section.shop_grid_area.section-padding-80
+  .container
+    .row
+      .col-md-12
+        .shop_grid_product_area
+          .row
+            .col-md-12
+              .product-topbar.d-flex.align-items-center.justify-content-between
+                .total-products
+                  %p
+                    %span= @products.count
+                    =t('spree.products_found')
+
+          .row
+            .col-md-12
+              %div{"data-hook" => "taxon_products"}
+                = render partial: 'spree/shared/products', locals: { products: @products, taxon: @taxon }
+              - unless params[:keywords].present?
+                %div{"data-hook" => "taxon_children"}
+                  - cache [I18n.locale, @taxon] do
+                    = render partial: 'taxon', collection: @taxon.children

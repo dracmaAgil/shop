@@ -1,27 +1,26 @@
 = form_for :order, url: populate_orders_path, html: { class: 'form-inline'} do |f|
   #inside-product-cart-form{"data-hook" => "inside_product_cart_form", :itemprop => "offers", :itemscope => "", :itemtype => "http://schema.org/Offer"}
+    
     - if @product.variants_and_option_values_for(current_pricing_options).any?
       #product-variants.columns.five.alpha
-        %h6.product-section-title= t('spree.variants')
-        %ul
-          - @product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index|
-            %li
-              = radio_button_tag "variant_id", variant.id, index == 0, 'data-price' => variant.price_for(current_pricing_options)
-              = label_tag "variant_id_#{ variant.id }" do
-                %span.variant-description
-                  = variant_options variant
-                - if variant_price variant
-                  %span.price.diff= variant_price variant
-                - unless variant.can_supply?
-                  %span.out-of-stock= t('spree.out_of_stock')
+        .row.product_variants
+          - @product.option_types.each do |ot|
+            .col-md-6
+              %span= t("spree.#{ ot.presentation.downcase }")
+              = select_tag("variant_id_#{ot.presentation.downcase}", options_for_select(ot.option_values.collect { |v| [v.presentation, v.id] if @product.variants_and_option_values_for(current_pricing_options).collect{ |v| variant_options(v) }.join(', ').include?(v.presentation)}.compact), prompt: t('spree.variant_select'), include_blank: false, class: "mr-5 variant_select_#{ot.presentation.downcase}")
+        = hidden_field_tag "variant_id"
+        = hidden_field_tag "product_id", @product.id
     - else
       = hidden_field_tag "variant_id", @product.master.id
+    %br
     - if @product.price_for(current_pricing_options) and !@product.price.nil?
       %div{:class => "columns five #{!@product.has_variants? ? 'alpha' : 'omega'}", "data-hook" => "product_price"}
+        %br
+        %br
         #product-price
-          %h6.product-section-title= t('spree.price')
+          / %h6.product-section-title= t('spree.price')
           %div
-            %p.price.selling.lead{:content => "#{@product.price_for(current_pricing_options).to_d}", :itemprop => "price"}
+            %p.product-price{:content => "#{@product.price_for(current_pricing_options).to_d}", :itemprop => "price"}
               = display_price(@product)
             %span{:content => "#{current_pricing_options.currency}", :itemprop => "priceCurrency"}
           - if @product.master.can_supply?
@@ -29,11 +28,13 @@
           - elsif @product.variants.empty?
             %br/
             %span.out-of-stock= t('spree.out_of_stock')
-        .add-to-cart.form-group
+        .add-to-cart.form-group.cart-fav-box.d-flex.align-items-center
           = number_field_tag :quantity, 1, class: 'title form-control', min: 1
           .ml-1
-          = button_tag class: 'large primary', id: 'add-to-cart-button', class:'btn btn-success', type: :submit do
-            = t('spree.add_to_cart')
+            = button_tag id: 'add-to-cart-button', name: 'addtocart', value: '5', class:'btn essence-btn large primary', type: :submit do
+              = t('spree.add_to_cart')
+          .roduct-favourite.ml-4
+            =content_tag('a', '', class: 'favme fa fa-heart')
     - else
       #product-price
         %br/

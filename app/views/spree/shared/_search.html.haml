@@ -1,0 +1,8 @@
+- @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots
+.search-area
+  = form_tag spree.products_path, method: :get do
+    - cache [I18n.locale, @taxons] do
+      / = select_tag :taxon, options_for_select([[t('spree.all_departments'), '']] + @taxons.map {|t| [t.name, t.id]}, @taxon ? @taxon.id : params[:taxon]), class: 'custom-select', 'aria-label' => 'Taxon'
+    = search_field_tag :keywords, params[:keywords], placeholder: t('spree.search'), id: 'headerSearch'
+    = button_tag :submit, name: nil do
+      %i.fa.fa-search.fa-lg

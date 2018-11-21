@@ -2,23 +2,35 @@
   = render partial: 'spree/shared/error_messages', locals: { target: @order }
   .row{"data-hook" => "checkout_header"}
     .col-md-12
-      %h1.columns.three.alpha{"data-hook" => "checkout_title"}= t('spree.checkout')
-      .columns.thirteen.omega{"data-hook" => "checkout_progress"}= checkout_progress
+      .breadcumb_area.bg-img{style: "background-image: url(/img/bg-img/breadcumb.jpg);"}
+        .container.h-100
+          .row.h-100.align-items-center
+            .col-12
+              .page-title.text-center
+                %h2.taxon-title= t('spree.checkout')
+      %br
+      .container
+        .columns.thirteen.omega{"data-hook" => "checkout_progress"}= checkout_progress
+.container
   %hr
-  .row{"data-hook" => "checkout_content"}
-    %div{:class => "columns #{if @order.state != 'confirm' then 'col-md-9' else 'col-md-12' end}", "data-hook" => "checkout_form_wrapper"}
+  .row.checkout_details_area{"data-hook" => "checkout_content"}
+    %div{:class => "columns #{if @order.state != 'confirm' then 'col-md-8' else 'col-md-12' end}", "data-hook" => "checkout_form_wrapper"}
       = form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form|
         - if @order.state == 'address' || !@order.email?
           .form-group.field{:style => "clear: both"}
-            = form.label :email
+            = form.label :email do
+              =t('spree.phone')
+              %span.required *
             %br/
             = form.email_field :email, class: 'form-control', required: true
-        = @order.state == 'address' || !@order.email?
+        / = @order.state == 'address' || !@order.email?
         = render @order.state, form: form
     
     - if @order.state != 'confirm'
-      #checkout-summary.col-md-3{"data-hook" => "checkout_summary_box"}
+      #checkout-summary.col-md-4{"data-hook" => "checkout_summary_box"}
         = render partial: 'summary', locals: { order: @order }
+%br/
+%br/
 :javascript
   Spree.current_order_id = "#{@order.number}"
   Spree.current_order_token = "#{@order.guest_token}"

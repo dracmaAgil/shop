@@ -10,6 +10,37 @@
           %h2
             New Collection
           =link_to 'view collection', '',class: 'btn essence-btn'
+.top_catagory_area.section-padding-80.clearfix
+  .container
+    .row.justify-content-center
+      .col-12.col-sm-6.col-md-4
+        .single_catagory_area.d-flex.align-items-center.justify-content-center.bg-img{style: "background-image: url(/img/bg-img/bg-2.jpg"}
+          .catagory-content
+            = link_to 'Clothing'
+      .col-12.col-sm-6.col-md-4
+        .single_catagory_area.d-flex.align-items-center.justify-content-center.bg-img{style: "background-image: url(/img/bg-img/bg-3.jpg"}
+          .catagory-content
+            = link_to 'Shoes'
+      .col-12.col-sm-6.col-md-4
+        .single_catagory_area.d-flex.align-items-center.justify-content-center.bg-img{style: "background-image: url(/img/bg-img/bg-4.jpg"}
+          .catagory-content
+            = link_to 'Accessories'
+
 %div{"data-hook" => "homepage_products"}
   - cache(cache_key_for_products) do
     = render partial: 'spree/shared/products', locals: { products: @products }
+
+.brands-area.d-flex.align-items-center.justify-content-between
+  / .popular-products-slides.owl-carousel   
+  .single-brands-logo
+    = image_tag('/img/core-img/brand1.png', alt: '')
+  .single-brands-logo
+    = image_tag('/img/core-img/brand2.png', alt: '')
+  .single-brands-logo
+    = image_tag('/img/core-img/brand3.png', alt: '')
+  .single-brands-logo
+    = image_tag('/img/core-img/brand4.png', alt: '')
+  .single-brands-logo
+    = image_tag('/img/core-img/brand5.png', alt: '')
+  .single-brands-logo
+    = image_tag('/img/core-img/brand6.png', alt: '')

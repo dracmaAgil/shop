@@ -1,53 +1,53 @@
 .row.steps-data
-  .card-group
-    - if order.has_checkout_step?("address")
-      .col-md-3.card{"data-hook" => "order-bill-address"}
-        .card-body
-          %h6.card-title
-            = t('spree.billing_address')
-            = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:address) unless order.completed?
-          .card-text
-            = render partial: 'spree/shared/address', locals: { address: order.bill_address }
-      - if order.has_checkout_step?("delivery")
-        .col-md-3.card{"data-hook" => "order-ship-address"}
+  .col-md-12.center
+    .card-group
+      - if order.has_checkout_step?("address")
+        .col-md-3.card{"data-hook" => "order-bill-address"}
           .card-body
             %h6.card-title
-              = t('spree.shipping_address')
+              = t('spree.billing_address')
               = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:address) unless order.completed?
             .card-text
-              = render partial: 'spree/shared/address', locals: { address: order.ship_address }
-        .col-md-3.card{"data-hook" => "order-shipment"}
+              = render partial: 'spree/shared/address', locals: { address: order.bill_address }
+        - if order.has_checkout_step?("delivery")
+          .col-md-3.card{"data-hook" => "order-ship-address"}
+            .card-body
+              %h6.card-title
+                = t('spree.shipping_address')
+                = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:address) unless order.completed?
+              .card-text
+                = render partial: 'spree/shared/address', locals: { address: order.ship_address }
+          .col-md-3.card{"data-hook" => "order-shipment"}
+            .card-body
+              %h6.card-title
+                = t('spree.shipments')
+                = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:delivery) unless order.completed?
+              .delivery.card-text
+                - order.shipments.each do |shipment|
+                  %div
+                    %i.fa.fa-truck
+                    = t('spree.shipment_details', stock_location: shipment.stock_location.name, shipping_method: shipment.selected_shipping_rate.name)
+              = render(partial: 'spree/shared/shipment_tracking', locals: {order: order}) if order.shipped?
+      - if order.has_checkout_step?("payment")
+        .col-md-3.card
           .card-body
             %h6.card-title
-              = t('spree.shipments')
-              = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:delivery) unless order.completed?
-            .delivery.card-text
-              - order.shipments.each do |shipment|
-                %div
-                  %i.fa.fa-truck
-                  = t('spree.shipment_details', stock_location: shipment.stock_location.name, shipping_method: shipment.selected_shipping_rate.name)
-            = render(partial: 'spree/shared/shipment_tracking', locals: {order: order}) if order.shipped?
-    - if order.has_checkout_step?("payment")
-      .col-md-3.card
-        .card-body
-          %h6.card-title
-            = t('spree.payment_information')
-            = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:payment) unless order.completed?
-          .payment-info.card-text
-            - order.payments.valid.each do |payment|
-              = render payment
-              %br/
+              = t('spree.payment_information')
+              = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:payment) unless order.completed?
+            .payment-info.card-text
+              - order.payments.valid.each do |payment|
+                = render payment
 %br/
 .row
   %table#line-items.table{"data-hook" => "order_details"}
-    %col{:halign => "center", :valign => "middle", :width => "15%"}/
-    %col{:valign => "middle", :width => "70%"}/
-    %col{:halign => "center", :valign => "middle", :width => "5%"}/
-    %col{:halign => "center", :valign => "middle", :width => "5%"}/
-    %col{:halign => "center", :valign => "middle", :width => "5%"}/
+    %col{halign: "center", valign: "middle", width: "15%"}/
+    %col{valign: "middle", width: "70%"}/
+    %col{halign: "center", valign: "middle", width: "5%"}/
+    %col{halign: "center", valign: "middle", width: "5%"}/
+    %col{halign: "center", valign: "middle", width: "5%"}/
     %thead{"data-hook" => ""}
       %tr{"data-hook" => "order_details_line_items_headers"}
-        %th{:colspan => "2"}= t('spree.item')
+        %th{colspan: "2"}= t('spree.item')
         %th.price= t('spree.price')
         %th.qty= t('spree.qty')
         %th.total
@@ -71,7 +71,7 @@
             %span= item.display_amount.to_html
     %tfoot#order-total{"data-hook" => "order_details_total"}
       %tr.total
-        %td{:colspan => "4"}
+        %td{colspan: "4"}
           %b
             = t('spree.order_total')
             \:
@@ -79,7 +79,7 @@
           %span#order_total= order.display_order_total_after_store_credit.to_html
     %tfoot#subtotal{"data-hook" => "order_details_subtotal"}
       %tr#subtotal-row.total
-        %td{:colspan => "4"}
+        %td{colspan: "4"}
           %b
             = t('spree.subtotal')
             \:
@@ -90,7 +90,7 @@
         %tfoot#price-adjustments{"data-hook" => "order_details_price_adjustments"}
           - order.line_item_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments|
             %tr.total
-              %td{:colspan => "4"}
+              %td{colspan: "4"}
                 = t('spree.promotion')
                 \:
                 %strong= label
@@ -99,7 +99,7 @@
     %tfoot#shipment-total
       - order.shipments.group_by { |s| s.selected_shipping_rate.name }.each do |name, shipments|
         %tr.total{"data-hook" => "shipment-row"}
-          %td{:colspan => "4"}
+          %td{colspan: "4"}
             = t('spree.shipping')
             \:
             %strong= name
@@ -109,7 +109,7 @@
       %tfoot#tax-adjustments{"data-hook" => "order_details_tax_adjustments"}
         - order.all_adjustments.tax.group_by(&:label).each do |label, adjustments|
           %tr.total
-            %td{:colspan => "4"}
+            %td{colspan: "4"}
               = t('spree.tax')
               \:
               %strong= label
@@ -118,7 +118,7 @@
     - if order.total_applicable_store_credit > 0.0
       %tfoot#store-credit{"data-hook" => "order_details_store_credit"}
         %tr.total
-          %td{:colspan => "4"}
+          %td{colspan: "4"}
             = t('spree.store_credit.store_credit')
             \:
           %td.total
@@ -127,7 +127,7 @@
       - order.adjustments.eligible.each do |adjustment|
         - next if (adjustment.source_type == 'Spree::TaxRate') and (adjustment.amount == 0)
         %tr.total
-          %td{:colspan => "4"}
+          %td{colspan: "4"}
             %strong= adjustment.label
           %td.total
             %span= adjustment.display_amount.to_html

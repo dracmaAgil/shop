@@ -1,13 +1,18 @@
 - address_id = address_type.chars.first
 .inner{"data-hook" => "#{address_type}_inner"}
   .form-group.field{id: "#{address_id}firstname" }
-    =form.label :firstname, t('spree.first_name')
-    %span.required *
+    =form.label :firstname do
+      =t('spree.first_name')
+      %span.required
+        *
     %br/
     =form.text_field :firstname, class: 'required form-control', autocomplete: address_type + ' given-name', required: true, autofocus: true
   
   .form-group.field{id: "#{address_id}lastname"}
-    =form.label :lastname, t('spree.last_name')
+    =form.label :lastname do
+      =t('spree.last_name')
+      %span.required
+        *
     %br/
     =form.text_field :lastname, class: 'required form-control', autocomplete: address_type + ' family-name'
   
@@ -18,54 +23,61 @@
       =form.text_field :company, class: 'form-control', autocomplete: address_type + ' organization'
   
   .form-group.field{id: "#{address_id}address1"}
-    =form.label :address1, t('spree.street_address')
-    %span.required *
+    =form.label :address1 do 
+      =t('spree.street_address')
+      %span.required *
     %br/
     = form.text_field :address1, class: 'required form-control', autocomplete: address_type + ' address-line1',  required: true
   
   .form-group.field{:id => "{address_id}address2"}
-    =form.label :address2, I18n.t('spree.street_address_2')
-    %br/
     =form.text_field :address2, class: 'form-control', autocomplete: address_type + ' address-line2'
   
-  .form-group.field{id: "#{address_id}city"}
-    =form.label :city, t('spree.city')
-    %span.required *
-    %br/
-    = form.text_field :city, class: 'required form-control', autocomplete: address_type + ' address-level2',  required: true
-  
   .form-group.field{:id => "#{address_id}country"}
-    =form.label :country_id, t('spree.country')
-    %span.required *
+    =form.label :country_id do
+      =t('spree.country')
+      %span.required *
     %br/
-    %span{:id => "#{address_id}country-selection"}
+    %span{id: "#{address_id}country-selection"}
       =form.collection_select :country_id, available_countries, :id, :name, {}, class: 'required form-control', autocomplete: address_type + ' country-name', required: true
+  %br/
+  %br/
   
   - if Spree::Config[:address_requires_state]
     .form-group.field{id: "#{address_id}state"}
       - have_states = !address.country.states.empty?
-      =form.label :state, t('spree.state')
-      %span.required{id: "#{address_id}state-required"}
-        *
+      =form.label :state do
+        =t('spree.state')
+        %span.required{id: "#{address_id}state-required"}
+          *
       %br/
-      %span.js-address-fields{:style => "display: none;"}
+      %span.js-address-fields{style: "display: none;", class: 'required'}
         =form.collection_select(:state_id, address.country.states, :id, :name, {include_blank: true}, { class: have_states ? 'required form-control' : '', style: have_states ? '' : 'display: none;', disabled: !have_states, autocomplete: address_type + ' address-level1'})
         = form.text_field(:state_name, class: !have_states ? 'required form-control' : '', style: have_states ? 'display: none;' : '', disabled: have_states, autocomplete: address_type + ' address-level1')
     
     %noscript
       = form.text_field :state_name, class: 'required form-control', autocomplete: address_type + ' address-level1',  required: true
+  %br/
+  %br/
+  .form-group.field{id: "#{address_id}city"}
+    =form.label :city do
+      =t('spree.city')
+      %span.required *
+    %br/
+    = form.text_field :city, class: 'required form-control', autocomplete: address_type + ' address-level2',  required: true
   
   .form-group.field{id: "#{address_id}zipcode"}
-    =form.label :zipcode, t('spree.zip')
-    - if address.require_zipcode?
-      %span.required *
+    =form.label :zipcode do
+      =t('spree.zip')
+      - if address.require_zipcode?
+        %span.required *
     %br/
     =form.text_field :zipcode, class: "#{'required form-control' if address.require_zipcode?}", autocomplete: address_type + ' postal-code',  required: true
   
   .form-group.field{id: "#{address_id}phone"}
-    =form.label :phone, t('spree.phone')
-    - if address.require_phone?
-      %span.required *
+    =form.label :phone do
+      =t('spree.phone')
+      - if address.require_phone?
+        %span.required *
     %br/
     - phone_hash = address.require_phone? ? { class: 'required form-control', required: true } : {}
     = form.phone_field :phone, phone_hash.merge({ autocomplete: address_type + ' home tel' })

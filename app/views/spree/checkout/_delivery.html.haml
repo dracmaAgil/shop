@@ -1,12 +1,12 @@
-%hr
 %fieldset#shipping_method{"data-hook" => ""}
-  %legend{:align => "center"}= t('spree.delivery')
+  .cart-page-heading.mb-30
+    %h5= t('spree.delivery')
   .inner{"data-hook" => "shipping_method_inner"}
     #methods
       = form.fields_for :shipments do |ship_form|
         .shipment
-          %h3.stock-location{"data-hook" => "stock-location"}
-            = t('spree.package_from')
+          .cart-page-heading.mb-30
+            %h6.stock-location{"data-hook" => "stock-location"}= t('spree.package_from')
             %strong.stock-location-name{"data-hook" => "stock-location-name"}= ship_form.object.stock_location.name
           %table.table.stock-contents{"data-hook" => "stock-contents"}
             %colgroup
@@ -27,7 +27,7 @@
                   %td.item-name= item.variant.name
                   %td.item-qty= item.quantity
                   %td.item-price= display_price(item.variant)
-          %h5.stock-shipping-method-title= t('spree.shipping_method')
+          %h6.stock-shipping-method-title= t('spree.shipping_method')
           %ul.field.radios.shipping-methods
             - ship_form.object.shipping_rates.each do |rate|
               %li.shipping-method
@@ -65,4 +65,6 @@
         = form.text_area :special_instructions, class: 'form-control', cols: 40, rows: 7
 %br/
 .form-buttons{"data-hook" => "buttons"}
-  = submit_tag t('spree.save_and_continue'), class: 'continue btn btn-success btn-block'
+  = submit_tag t('spree.save_and_continue'), class: 'continue btn essence-btn btn-block'
+%br/
+%br/

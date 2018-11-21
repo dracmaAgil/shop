@@ -1,5 +1,6 @@
 %fieldset#payment{"data-hook" => ""}
-  %legend{:align => "center"}= t('spree.payment_information')
+  .cart-page-heading.mb-30
+    %h5= t('spree.payment_information')
   %div{"data-hook" => "checkout_payment_step"}
     - if @wallet_payment_sources.present?
       .card_options
@@ -27,7 +28,7 @@
       - @order.available_payment_methods.each do |method|
         %li{:class => "#{'last' if method == @order.available_payment_methods.last}", "data-hook" => "", :id => "payment_method_#{method.id}"}
           %fieldset
-            = binding.pry
+            / = binding.pry
             = render partial: "spree/checkout/payment/#{method.partial_name}", locals: { payment_method: method }
     %br{:style => "clear:both;"}/
     / .form-group.field{"data-hook" => "coupon_code"}
@@ -39,6 +40,6 @@
     / #coupon_status
 %br.space/
 .form-buttons{"data-hook" => "buttons"}
-  = submit_tag t('spree.save_and_continue'), class: 'continue btn btn-success btn-block'
+  = submit_tag t('spree.save_and_continue'), class: 'continue btn essence-btn btn-block'
   :javascript
     Spree.disableSaveOnClick();

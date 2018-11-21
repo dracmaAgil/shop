@@ -1,13 +1,11 @@
-#= require jquery
+#= require jquery2
 #= require jquery_ujs
 #= require spree
-#= require bootstrap
 #= require popper
+#= require bootstrap
+
+#= require spree/frontend/classy-nav.min
 
 #= require spree/frontend/checkout
 #= require spree/frontend/product
 #= require spree/frontend/cart
-
-#= require spree/frontend/plugins
-#= require spree/frontend/classy-nav.min
-#= require spree/frontend/active

@@ -36,16 +36,17 @@ module Spree::BaseHelper
 
   def nav_tree(root_taxon, current_taxon, max_level = 1)
     return '' if max_level < 1 || root_taxon.children.empty?
-    content_tag :div, class: 'dropdown-menu', "aria-labelledby" => "navbarDropdownMenuLink" do
-      taxons = root_taxon.children.map do |taxon|
+    
+    taxons = root_taxon.children.map do |taxon|
+      content_tag :li, "aria-labelledby" => "navbarDropdownMenuLink" do
         css_class = (current_taxon && current_taxon.self_and_ancestors.include?(taxon)) ? 'active dropdown-item' : 'dropdown-item'
         content_tag :a, href: seo_url(taxon), class: css_class do
           taxon.name +
           taxons_tree(taxon, current_taxon, max_level - 1)
         end
       end
-      safe_join(taxons, "\n")
     end
+    safe_join(taxons, "\n")
   end
 
   def taxon_breadcrumbs(taxon, separator = '&nbsp;&raquo;&nbsp;', breadcrumb_class = 'inline breadcrumb')
@@ -71,5 +72,25 @@ module Spree::BaseHelper
 
       content_tag(:nav, content_tag(:ol, raw(items.map(&:mb_chars).join), class: breadcrumb_class, itemscope: '', itemtype: 'https://schema.org/BreadcrumbList'), id: 'breadcrumb', class: 'fluid', 'aria-label' => 'breadcrumb')
     end
+
+  def get_brand_name(taxonomies, product)
+    product.taxons.select { |e| e.name if e.taxonomy_id == taxonomies.select { |e| e.id if e.name == 'Brand'}.map { |i| i.id}.first}.map { |i| i.name}.first
+  end
+
+  def product_promotions(product)
+    badge_class = ''
+    promotion_name = ''
+    if product.promotion_rules.any?
+      product.promotion_rules.each do |promotion_rule|
+        if promotion_rule.promotion.promotion_category.name == "descuento" 
+          badge_class = 'product-badge offer-badge'
+          promotion_name = promotion_rule.promotion.name
+        end
+      end
+    end
+    content_tag(:div, class: badge_class) do
+      content_tag(:span, promotion_name)
+    end
+  end
 
 end

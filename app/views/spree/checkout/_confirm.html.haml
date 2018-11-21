@@ -1,6 +1,7 @@
 %fieldset#order_details{"data-hook" => ""}
   .clear
-  %legend{:align => "center"}= t('spree.confirm')
+  .cart-page-heading.mb-30
+    %h5= t('spree.confirm')
   = render partial: 'spree/shared/order_details', locals: { order: @order }
 %br/
 .form-buttons{"data-hook" => "buttons"}
@@ -10,7 +11,9 @@
         .policy= render partial: "spree/checkout/terms_and_conditions"
         = check_box_tag :accept_terms_and_conditions, 'accepted', false
         = label_tag :accept_terms_and_conditions, t('spree.agree_to_terms_of_service')
-    = submit_tag t('spree.place_order'), disabled: requires_acceptance, class: "continue btn btn-success btn-block #{ 'disabled' if requires_acceptance}"
+    = submit_tag t('spree.place_order'), disabled: requires_acceptance, class: "continue btn essence-btn btn-block #{ 'disabled' if requires_acceptance}"
   :javascript
     Spree.disableSaveOnClick();
-%br
+%br/
+%br/
+%br/

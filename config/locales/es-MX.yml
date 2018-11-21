@@ -12,17 +12,28 @@ es-MX:
         state: Estado / Provincia
         zipcode: Código Postal
       spree/adjustment:
+        adjustment: Ajustes
         adjustable: Ajustable
         amount: Cantidad
         label: Descripción
         name: Nombre
         state: Estado
-        adjustment_reason_id: Razón
+        adjustment_reason_id: Id de razón de ajuste
       spree/adjustment_reason:
         active: Activo
         code: Código
         name: Nombre
         state: Estado
+      spree/refund_reason:
+        code: Código
+        name: Nombre
+        state: Estado
+      spree/reimbursement_type:
+        name: Nombre
+        type: Tipo
+      spree/return_reason:
+        active: Activo
+        name: Nombre
       spree/calculator/tiered_flat_rate:
         preferred_base_amount: Monto base deseado
         preferred_tiers:
@@ -39,7 +50,7 @@ es-MX:
         base:
         cc_type: Tipo
         month: Mes
-        name:
+        name: Nombre
         number: Número
         verification_value: Código de Verificación
         year: Año
@@ -52,6 +63,7 @@ es-MX:
         name: Nombre
         presentation: Presentación
       spree/order:
+        adjustment: Ajustes
         checkout_complete: Flujo de Compra Completado
         completed_at: Completado el
         considered_risky: Considerado riesgoso
@@ -128,6 +140,11 @@ es-MX:
       spree/promotion_category:
         name: Nombre
         code: Código
+      spree/promotion_code_batch:
+        base_code: Código base
+        join_characters: Unir caracteres
+        number_of_codes: Número de códigos
+        email: Correo electrónico
       spree/property:
         name: Nombre
         presentation: Presentación
@@ -245,6 +262,10 @@ es-MX:
       spree/address:
         one: Dirección
         other: Direcciones
+      spree/adjustment:
+        one: Ajuste
+        other: Ajustes
+      spree/adjustment_reason: Razón de ajuste
       spree/country:
         one: País
         other: Paises
@@ -275,6 +296,7 @@ es-MX:
       spree/promotion: Promoción
       spree/promotion_category: Categoría de promoción
       spree/promotion_code: Código de promoción
+      spree/promotion_code_batch: Grupo de códigos de promoción
       spree/property:
         one: Propiedad
         other: Propiedades
@@ -282,13 +304,14 @@ es-MX:
         one: Prototipo
         other: Prototipos
       spree/price: Precio
-      spree/refund_reason:
-      spree/reimbursement:
-      spree/reimbursement_type:
+      spree/refund_reason: Razón para la devolución
+      spree/reimbursement: Reembolso
+      spree/reimbursement_type: Tipo de reembolso
       spree/return_authorization:
         one: Autorización de Devolución
         other: Autorizaciones de Devolución
-      spree/return_authorization_reason:
+      spree/return_authorization_reason: Razón para la autorización de devolución
+      spree/return_reason: Razón de retorno de mercancía
       spree/role:
         one: Rol
         other: Roles
@@ -298,11 +321,11 @@ es-MX:
       spree/shipping_category:
         one: Categoría de Envío
         other: Categorías de Envíos
-      spree/shipping_method:
+      spree/shipping_method: Metodo de envío
       spree/state:
         one: Estado
         other: Estados
-      spree/state_change:
+      spree/state_change: Cambio de estado
       spree/stock_location: Ubicación de mercancía
       spree/stock_movement:  Movimiento de mercancía
       spree/stock_transfer: Transferencia de mercancía
@@ -390,6 +413,8 @@ es-MX:
       spree_user:
         signed_up: Cuenta creada exitosamente
   spree:
+    size: Tamaño
+    color: Color
     abbreviation: Abreviatura
     accept: Aceptar
     acceptance_errors: Errores en aceptación
@@ -399,6 +424,7 @@ es-MX:
     account_updated: Cuenta actualizada
     action: Acción
     actions:
+      add: Agregar
       cancel: Cancelar
       continue: Continuar
       create: Crear
@@ -424,11 +450,12 @@ es-MX:
     add_option_value: Añadir valor de opción
     add_product: Añadir producto
     add_product_properties: Añadir propiedades de producto
-    add_rule_of_type: Añadir regla de tipo
+    add_rule_of_type: Añadir tipo de regla
     add_state: Añadir Estado / Provincia
     add_stock: Añadir mercancía
     add_stock_management: Añadir gestión de inventario
     add_to_cart: Añadir al carrito
+    add_taxon: Agregar taxonomía
     add_variant: Añadir variante
     additional_item: Costo adicional por elemento
     address1: Dirección
@@ -469,6 +496,8 @@ es-MX:
         new:
           new_price: Nuevo precio
       promotions:
+        actions:
+          calculator_label: Calculador
         form:
           starts_at_placeholder: Inmediatamente
           expires_at_placeholder: Nunca
@@ -524,6 +553,11 @@ es-MX:
           amount_authorized_exceeds_total_credit: " excede el crédito disponible"
           amount_used_not_zero: "Es mayor que cero. No se puede eliminar el crédito de tienda"
           update_reason_required: "Se debe seleccionar una razón para el cambio"
+      stock_locations:
+        form:
+          general: Datos generales
+          settings: Preferencias
+          address: Dirección
       tab:
         adjustment: Ajustes
         areas: Ubicaciones
@@ -541,7 +575,7 @@ es-MX:
         promotion_categories: Categorías de la Promoción
         properties: Tipos de Propiedad
         reports: Informes
-        rma: RMA
+        rma: Autorización de retorno de mercancía
         settings: Ajustes
         shipping: Envío
         stock: Mercancía
@@ -564,8 +598,13 @@ es-MX:
         order_num: "Pedido #"
         orders: Pedidos
         store_credit: Crédito de Tienda
+        user: Usuario
         user_information: Información del Usuario
       users:
+        edit:
+          api_access: Acceso al API
+          no_key: Sin llave
+          generate_key: Generar llave
         user_page_actions:
           create_order: Crear pedido para este usuario
       variants:
@@ -581,7 +620,7 @@ es-MX:
           pricing: Precio
           pricing_hint: Estos valores se informan en la página de detalle del producto y se pueden sobreescribir más abajo
     administration: Administración
-    advertise:
+    advertise: Anunciar
     agree_to_privacy_policy: Aceptar política de privacidad.
     agree_to_terms_of_service: Aceptar términos del servicio.
     all: Todos
@@ -639,8 +678,8 @@ es-MX:
     back_to_reports_list: Volver a Lista de Informes
     back_to_refund_reason_list: Volver a Lista de Motivos de Devolución
     back_to_reimbursement_type_list: Volver a Lista de Tipos de Reembolso
-    back_to_return_authorizations_list: Volver a Lista RMA
-    back_to_rma_reason_list: Volver a Lista de razones RMA
+    back_to_return_authorizations_list: Volver a Lista de autorización de retorno de mercancía
+    back_to_rma_reason_list: Volver a Lista de razones de autorización de retorno de mercancía
     back_to_shipping_categories: Volver a Categorías de Envío
     back_to_shipping_categories_list: Volver a Lista de Categorías de Envío
     back_to_shipping_methods_list: Volver a Lista de Métodos de Envío
@@ -704,6 +743,10 @@ es-MX:
     choose_currency: Elegir Moneda
     choose_dashboard_locale: Escoger Idioma del Panel de Control
     choose_location: Elegir ubicación
+    choose_promotion_action: Seleccionar la acción de la promoción
+    choose_promotion_rule: Seleccionar la regla de la promoción
+    product: Producto
+    
     city: Ciudad
     clear_cache: Borrar Cache
     clear_cache_ok: La Cache fue borrada
@@ -974,21 +1017,21 @@ es-MX:
     item_total: Total de artículos
     item_total_rule:
       operators:
-        gt: mayor que
-        gte: mayor o igual que
-        lt:
-        lte:
-    items_cannot_be_shipped:
+        gt: Mayor que
+        gte: Mayor o igual que
+        lt: Menor que
+        lte: Menor que o igual que
+    items_cannot_be_shipped: Artículos no pueden ser enviados.
     items_in_rmas:
-    items_reimbursed:
-    items_to_be_reimbursed:
+    items_reimbursed: Artículos reembolsados
+    items_to_be_reimbursed: Artículos a reembolsar
     jirafe: Jirafe
     landing_page_rule:
       path: Ruta
     last_name: Apellidos
     last_name_begins_with: Apellido comienza por
     learn_more: Aprender más
-    lifetime_stats:
+    lifetime_stats: Historico de estadísticas
     line_item_adjustments: Ajustes de artículo
     list: Lista
     loading: Cargando
@@ -1035,7 +1078,7 @@ es-MX:
     negative_movement_absent_item: No puede crear un movimiento negativo para un artículo ausente en el mercancía.
     new: Nuevo
     new_adjustment: Nuevo Ajuste
-    new_adjustment_reason: Razón Nuevo Ajuste
+    new_adjustment_reason: Nueva razón para ajuste
     new_customer: Nuevo Cliente
     new_customer_return: Nueva Devolución Cliente
     new_country: Nuevo País
@@ -1050,21 +1093,21 @@ es-MX:
     new_promotion_category: Nueva Categoría de Promoción
     new_promotion_code_batch: Nuevo Grupo de Códigos de Promoción
     new_property: Nuevo Tipo de Propiedad
-    new_refund: Nuevo Reintegro
-    new_refund_reason: Nueva Razón Reintegro
-    new_rma_reason: Nueva Razón RMA
-    new_return_authorization: Nuevo RMA
+    new_refund: Nueva devolución
+    new_refund_reason: Nueva razón de devolución
+    new_rma_reason: Nueva razón de autorización de retorno de mercancía
+    new_return_authorization: Nueva autorización de retorno de mercancía
     new_shipping_category: Nueva Categoría Envío
     new_shipping_method: Nuevo Método de Envío
     new_shipment_at_location: Nuevo envío a la localización
     new_state: Nueva Provincia/Estado
-    new_stock_location: Nueva Localización de mercancía
-    new_stock_movement: Nuevo Movimiento de mercancía
-    new_stock_transfer: Nueva Transferencia de mercancía
-    new_store_credit: Nuevo Crédito de Tienda
+    new_stock_location: Nueva ubicación de mercancía
+    new_stock_movement: Nuevo movimiento de mercancía
+    new_stock_transfer: Nueva transferencia de mercancía
+    new_store_credit: Nuevo crédito de tienda
     new_store: Nueva tienda
     new_tax_category: Nueva Categoría de Impuestos
-    new_tax_rate: Nuevo tasa de Impuestos
+    new_tax_rate: Nueva tasa de Impuestos
     new_taxon: Nuevo Taxón
     new_taxonomy: Nueva Taxonomía
     new_tracker: Nuevo Analytics Tracker
@@ -1112,6 +1155,7 @@ es-MX:
       variant_deleted: La variante ha sido eliminada
       variant_not_deleted: La variante no ha podido eliminarse
     num_orders: Número de ordenes
+    number_of_codes: Número de códigos
     on_hand: Disponible
     open: Abrir
     open_all_adjustments: Abrir todos los ajustes
@@ -1126,7 +1170,7 @@ es-MX:
     or_over_price: "%{price} o más"
     order: Pedido
     order_adjustments: Ajuste de pedido
-    order_already_updated:
+    order_already_updated: Pedido Actualizado
     order_approved: Pedido aprobado
     order_canceled: Pedido cancelado
     order_details: Detalles del pedido
@@ -1149,10 +1193,13 @@ es-MX:
         subtotal: Subtotal
         thanks: Gracias por su negocio
         total: Total
+    order_mutex_error: Error de exclusión mutua
     order_not_found: No pudimos encontrar su orden. Por favor inténtalo de nuevo
     order_number: Numero de pedido
+    order_please_refresh: Favor de Actualizar el Pedido
     order_processed_successfully: Su pedido se ha procesado correctamente
-    order_resumed:
+    order_refresh_totals: Actualizar total de pedido
+    order_resumed: Pedido resumido
     order_state:
       address: dirección
       awaiting_return: esperando respuesta
@@ -1237,19 +1284,20 @@ es-MX:
     product_properties: Propiedades del producto
     product_rule:
       choose_products: Elija productos
-      label:
-      match_all: todos
-      match_any: al menos uno de
-      match_none:
+      label: Etiqueta
+      match_all: Todos
+      match_any: Al menos uno de
+      match_none: Ninguno
       product_source:
         group: Del grupo de productos
         manual: Elegir manualmente
     products: Productos
+    products_found: Productos encontrados
     promotion: Promoción
     promotion_action: Acción de promoción
     promotion_action_types:
       create_adjustment:
-        description: Crea un ajuste de credito de promocion en la orden
+        description: Crea un ajuste de credito en la promoción en el pedido
         name: Crear ajuste
       create_item_adjustments:
         description: 
@@ -1265,20 +1313,20 @@ es-MX:
       match_policies:
         all: Coincide con todas las siguientes reglas
         any: Coincide con alguna de estas reglas
-    promotion_rule: Regla de promoción
+    promotion_rule: Regla de promociónnn
     promotion_rule_types:
       first_order:
         description: Debe ser el primer pedido del cliente
         name: Primer pedido
       item_total:
         description: El total del pedido coincide con estos criterios
-        name: Total de elementos
+        name: Total de artículo(s)
       landing_page:
         description: El cliente debió haber visitado la página específica
         name: Página de inicio
       one_use_per_user:
-        description:
-        name:
+        description: El cliente solo tiene para usar un descuento-promoción
+        name: Un uso por usuario
       option_value:
         description:
         name:
@@ -1317,15 +1365,15 @@ es-MX:
     reception_status:
     reference: Referencia
     refund: Devolver
-    refund_amount_must_be_greater_than_zero:
-    refund_reasons:
-    refunded_amount:
-    refunds:
+    refund_amount_must_be_greater_than_zero: El monto de la devolución debe ser mayor a cero
+    refund_reasons: Razones para la devolución
+    refunded_amount: Monto 
+    refunds: devoluciones
     register: Registrar
     registration: Registro
-    reimburse: 
-    reimbursed:
-    reimbursement:
+    reimburse: Reembolsar
+    reimbursed: Reembolsado
+    reimbursement: Reembolso
     reimbursement_mailer:
       reimbursement_email:
         days_to_send: Días para enviar
@@ -1347,7 +1395,7 @@ es-MX:
     remember_me: Recuerdame
     remove: Eliminar
     rename: Renombrar
-    report:
+    report: Reporte
     reports: Informes
     resend: Volver a enviar
     reset_password: Reiniciar mi contraseña
@@ -1361,7 +1409,7 @@ es-MX:
     return_authorizations: Autorizaciones para devoluciones
     return_item_inventory_unit_ineligible: Unidad de inventario de producto a devolver inelegible
     return_item_inventory_unit_reimbursed: Unidad de inventario de producto reembolsado
-    return_item_rma_ineligible: RMA de producto a devolver inelegible
+    return_item_rma_ineligible: Autorizacion de retorno de producto a devolver inelegible
     return_item_time_period_ineligible: Perido de tiempo para devolver producto inelegible
     return_items: Devolución de mercancía
     return_items_cannot_be_associated_with_multiple_orders: Productos devueltos no pueden ser asociados a multiples ordenes
@@ -1373,9 +1421,9 @@ es-MX:
     risk: Riesgo
     risk_analysis: Análisis de riesgo
     risky: Arriesgado
-    rma_credit: Crédito RMA
-    rma_number: Número RMA
-    rma_value: Valor RMA
+    rma_credit: Crédito de autorización de retorno de mercancía
+    rma_number: Número de autorización de retorno de mercancía
+    rma_value: Valor de autorización de retorno de mercancía
     roles: Funciones
     rules: Reglas
     safe: Seguro
@@ -1535,11 +1583,11 @@ es-MX:
     tax_included: Impuesto incluido
     tax_rate_amount_explanation: Las tasas de impuesto son una cantidad decimal para ayudar en el cálculo (por ejemplo, si la tasa de impuesto es 5% entonces introduce 0.05)
     tax_rates: Tasas de impuestos
-    taxon: Taxon
-    taxon_edit: Editar taxon
+    taxon: Taxón
+    taxon_edit: Editar taxón
     taxon_placeholder: Agregar taxón
     taxon_rule:
-      choose_taxons:
+      choose_taxons: Elegir taxón
       label: Etiqueta
       match_all: Todos
       match_any: Alguno
@@ -1618,6 +1666,7 @@ es-MX:
     variant_properties: Propiedades Variante
     variant_search: Buscar Variante
     variant_search_placeholder: "SKU o valor de opción"
+    variant_select: Elige una opción
     variant_to_add: Variante a añadir
     variant_to_be_received: Variante a recibir
     variants: Variantes
