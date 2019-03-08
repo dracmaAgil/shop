@@ -1,6 +1,6 @@
 Spree::Product.class_eval do
 
-  # Find the Product's Variant
+   # Find the Product's Variant
   def find_variant_by_options(array)
     option_values = Spree::OptionValue.where(id: array)
     variants = []

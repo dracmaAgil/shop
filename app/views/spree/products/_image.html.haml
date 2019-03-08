@@ -1,8 +1,5 @@
-.product_thumbnail_slides.owl-carousel
-  / - binding.pry
-  - product.images.each do |image|
-    - if defined?(image) && image
-      / - binding.pry
-      = render 'spree/shared/image', image: image, size: :large, itemprop: "image"
-    - else
-      = render 'spree/shared/image', image: product.display_image, size: :large, itemprop: "image"
+- product.images.each do |image|
+  - if defined?(image) && image
+    = render 'spree/shared/image', image: image, size: :large, itemprop: "image"
+  - else
+    = render 'spree/shared/image', image: product.display_image, size: :large, itemprop: "image"

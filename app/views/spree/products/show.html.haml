@@ -11,13 +11,8 @@
                 .col-md-8
                   %center
                     #main-image{"data-hook" => ""}
-<<<<<<< HEAD
-                      = render partial: 'image'
-                    #main-image-1
-=======
                       .product_thumbnail_slides.owl-carousel
                         = render partial: 'image'
->>>>>>> 578b95e... wip
                 .col-md-4
                   %div{"data-hook" => "promotions"}
                     = render partial: 'promotions'
@@ -25,8 +20,9 @@
                 .col-md-12
                   %center
                     #main-image{"data-hook" => ""}
-                      = render partial: 'image', locals: {product: @product}
-
+                      .product_thumbnail_slides.owl-carousel
+                        = render partial: 'image', locals: {product: @product}
+                    #main-image-1
       .single_product_desc.clearfix{"data-hook" => "product_right_part"}
         %span= get_brand_name(@taxonomies, @product)
         %h3.product-title{:itemprop => "name"}= @product.name
