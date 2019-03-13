@@ -1,5 +1,5 @@
 - product.images.each do |image|
   - if defined?(image) && image
-    = render 'spree/shared/image', image: image, size: :large, itemprop: "image"
+    = render 'spree/shared/image', image: image, size: :product, itemprop: "image"
   - else
-    = render 'spree/shared/image', image: product.display_image, size: :large, itemprop: "image"
+    = render 'spree/shared/image', image: product.display_image, size: :product, itemprop: "image"
