@@ -5,9 +5,6 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'solidus'
-gem 'solidus_auth_devise'
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use postgresql as the database for Active Record
@@ -38,12 +35,19 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-gem 'haml-rails'
-gem 'font-awesome-sass', '~> 5.3.1'
+
+# solidus core gems
+gem 'solidus'
+gem 'solidus_auth_devise'
 gem 'activemerchant'
-# gem 'solidus_gateway'
 gem 'solidus_paypal_braintree', github: 'solidusio/solidus_paypal_braintree', branch: :master
 gem 'solidus_i18n', '~> 2.0'
+
+# fancy html gems
+gem 'haml-rails', '~> 1.0'
+gem 'font-awesome-sass', '~> 5.3.1'
+
+# i18n gems
 gem 'rails-i18n', '~> 5.1'
 gem 'kaminari-i18n', '~> 0.5.0'
 gem 'routing-filter', '~> 0.6.0'
